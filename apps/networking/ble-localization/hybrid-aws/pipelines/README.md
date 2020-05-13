@@ -1,9 +1,11 @@
+# BLERSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
+
 <!-- vscode-markdown-toc -->
-* 1. [Pre-requisites](#Pre-requisites)
-* 2. [AWS Setup](#AWSSetup)
-	* 2.1. [Create S3 Bucket](#CreateS3Bucket)
+1. [Pre-requisites](#Pre-requisites)
+2. [AWS Setup](#AWSSetup)
+  * 2.1. [Create S3 Bucket](#CreateS3Bucket)
 	* 2.2. [Setup SageMaker permissions](#SetupSageMakerpermissions)
-* 3. [UCS Setup](#UCSSetup)
+3. [UCS Setup](#UCSSetup)
 	* 3.1. [Retrieve Ingress IP](#RetrieveIngressIP)
 	* 3.2. [Create Jupyter Notebook Server](#CreateJupyterNotebookServer)
 	* 3.3. [Upload Hybrid Pipeline notebook](#UploadHybridPipelinenotebook)
@@ -15,7 +17,7 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># BLERSSI Hybrid Pipeline using Cisco UCS 🤝 SageMaker
+<!-- /vscode-markdown-toc -->
 
 ##  1. <a name='Pre-requisites'></a>Pre-requisites
 
