@@ -22,7 +22,8 @@
 <!-- /vscode-markdown-toc -->
 
 ## <a name='ProblemDefinition'></a>Problem Definition
-The problem definition can be found [here](../../README.md).
+The description of the BLE-RSSI based localization prediction
+can be found [here](../../README.md).
 
 ## <a name='Prerequisites'></a>Prerequisites
 
