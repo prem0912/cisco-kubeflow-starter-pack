@@ -1,13 +1,12 @@
-# BLERSSI Hybrid Pipeline 
-
-# Cisco UCS 🤝 SageMaker
+# BLERSSI Hybrid Pipeline on Cisco UCS 🤝 SageMaker
 
 ## Pre-requisites
 
-- [ ] UCS machine with Kubeflow installed
+- [ ] UCS machine with Kubeflow 1.0 installed
 - [ ] AWS account with appropriate permissions
 
-## AWS S3 Create Bucket
+## AWS Setup
+### Create S3 Bucket
 
 Ensure you have the AWS CLI installed. 
 Otherwise, you can use the docker image with the alias set.
@@ -15,7 +14,7 @@ Otherwise, you can use the docker image with the alias set.
     alias aws='docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli'
     aws s3 mb s3://mxnet-model-store --region us-west-2
 
-## SageMaker permissions
+### Setup SageMaker permissions
 
 In order to run this pipeline, we need to prepare an IAM Role to run Sagemaker jobs. You need this `role_arn` to run a pipeline. Check [here](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html) for details.
 
@@ -36,18 +35,37 @@ data:
   AWS_SECRET_ACCESS_KEY: YOUR_BASE64_SECRET_ACCESS
 ```
 
-## Run notebook to create pipeline
+## UCS Setup
 
-Ensure you have jupyter lab installed on your local machine. And Kubeflow installed 
+To install Kubeflow, follow the instructions [here](../../../../../install)
 
-    git clone https://github.com/CiscoAI/cisco-kubeflow-starter-pack cksp
-    cd cksp
-    cd apps/networking/ble-localization/hybrid-aws/pipelines/
+### Retrieve Ingress IP
+
+For installation, we need to know the external IP of the 'istio-ingressgateway' service. This can be retrieved by the following steps.  
+
+```
+kubectl get service -n istio-system istio-ingressgateway
+```
+
+If your service is of LoadBalancer Type, use the 'EXTERNAL-IP' of this service.  
+
+Or else, if your service is of NodePort Type - run the following command:  
+
+```
+kubectl get nodes -o wide
+```
+
+Use either of 'EXTERNAL-IP' or 'INTERNAL-IP' of any of the nodes based on which IP is accessible in your network.  
+
+This IP will be referred to as INGRESS_IP from here on.
+
+### Create Jupyter Notebook Server
+
+Follow the [steps](./../notebook#create--connect-to-jupyter-notebook-server) to create & connect to Jupyter Notebook Server in Kubeflow    
     
-    
-### Upload Notebook file
+### Upload Hybrid Pipeline notebook
 
-Upload [blerssi-aws.ipynb](blerssi-aws.ipynb) file in jupyter notebook
+Upload [blerssi-aws.ipynb](blerssi-aws.ipynb) file to the created Notebook server.
     
 ### Run Pipeline
 
@@ -57,7 +75,7 @@ Set the input parameters for the pipeline in the first cell of the notebook.
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-1.PNG)
 
-Import libraries and declare variables(model and deploy)
+Import libraries and set model/deploy component yaml path variables.
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-2.PNG)
 
@@ -65,18 +83,14 @@ Define BLERSSI mxnet pipeline function
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-3.PNG)
 
-Create kubeflow experiment with name "BLERSSI-Sagemaker"
+Create experiment with name "BLERSSI-Sagemaker"
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
 
-### Note :
+### Note - Building inference image
+   Run build & push script [here](./components/v1/mxnet-byom-inference/container/build_and_push.sh) using your *account credentials*.
 
-  Inorder to create the sagemaker endpoint, create inference image push to ecr repo. follow the below steps
-    
-  1. Create docker image from [this](./components/v1/mxnet-byom-inference/container/) location
-  2. push docker image to ecr repository.	 click [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) for details
-
-Set AWS region and inference image parameters
+Set AWS region, and inference image to the built ECR image
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-5.PNG)
 
@@ -85,12 +99,12 @@ Create BLERSSI run and open run link
 ![BLERSSI Pipeline](./pictures/notebook-sabe-6.PNG)
 
 
-The BLERSSI Sagemaker pipeline starts execting. 
+The BLERSSI Sagemaker pipeline starts executing. 
 Once all the components executed successfully, check the logs of sagemaker-deploy component to verify endpoint is created.
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-7.PNG)
 
-To verify endpoint in AWS, open AWS sagemaker and check endpoints created succussfully as snapshot given below
+To verify endpoint in AWS, open AWS sagemaker and check endpoints created successfully as snapshot given below
 
 ![BLERSSI Pipeline](./pictures/aws-sagemaker-endpoint.PNG)
 
