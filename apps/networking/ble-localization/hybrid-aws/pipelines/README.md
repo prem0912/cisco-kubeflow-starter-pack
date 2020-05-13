@@ -3,6 +3,7 @@
 <!-- vscode-markdown-toc -->
 * [Problem Definition](#ProblemDefinition)
 * [Prerequisites](#Prerequisites)
+* [Solution Schematic](#SolutionSchematic)
 * [AWS Setup](#AWSSetup)
 	* [Create S3 Bucket](#CreateS3Bucket)
 	* [Setup SageMaker permissions](#SetupSageMakerpermissions)
@@ -12,7 +13,7 @@
 	* [Create Jupyter Notebook Server](#CreateJupyterNotebookServer)
 	* [Upload Hybrid Pipeline notebook](#UploadHybridPipelinenotebook)
 	* [Run Pipeline](#RunPipeline)
-	* [Note - Building inference image](#Note-Buildinginferenceimage)
+	* [Building inference image](#Buildinginferenceimage)
 	* [Run Prediction API](#RunPredictionAPI)
 
 <!-- vscode-markdown-toc-config
@@ -30,7 +31,7 @@ can be found [here](../../README.md).
 - [ ] UCS machine with Kubeflow 1.0 installed
 - [ ] AWS account with appropriate permissions
 
-## Solution Schematic
+## <a name='SolutionSchematic'></a>Solution Schematic
 
 ![Solution Schematic](./pictures/cisco-aws-schematic.png)
 
@@ -128,7 +129,8 @@ Create experiment with name "BLERSSI-Sagemaker"
 
 ![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
 
-### <a name='Note-Buildinginferenceimage'></a>Note - Building inference image
+:information_source:
+### <a name='Buildinginferenceimage'></a>Building inference image
    Run build & push script [here](./components/v1/mxnet-byom-inference/container/build_and_push.sh) using your *account credentials*.
 
 Set AWS region, and inference image to the built ECR image
