@@ -10,5 +10,3 @@ training could be done in the cloud and the inference could be done
 on-premise.
 
 ![Hybrid On-Prem Cloud Model](./hybrid-onprem-cloud.png)
-
-A schematic of the hybrid cloud model is shown in the above picture.
