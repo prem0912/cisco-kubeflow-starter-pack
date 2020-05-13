@@ -17,6 +17,10 @@ Otherwise, you can use the docker image with the alias set.
 ### Setup SageMaker permissions
 
 In order to run this pipeline, we need to prepare an IAM Role to run Sagemaker jobs. You need this `role_arn` to run a pipeline. Check [here](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html) for details.
+IAM Role should have AmazonS3FullAccess and AmazonSageMakerFullAccess policies attached.
+
+![BLERSSI Pipeline](./pictures/aws-role.PNG)
+
 
 This pipeline also use aws-secret to get access to Sagemaker services, please also make sure you have a `aws-secret` in the kubeflow namespace.
 
