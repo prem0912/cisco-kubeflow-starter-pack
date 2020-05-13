@@ -1,7 +1,7 @@
 # BLE-RSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
 
 <!-- vscode-markdown-toc -->
-* [Pre-requisites](#Pre-requisites)
+* [Prerequisites](#Prerequisites)
 * [AWS Setup](#AWSSetup)
 	* [Create S3 Bucket](#CreateS3Bucket)
 	* [Setup SageMaker permissions](#SetupSageMakerpermissions)
@@ -20,7 +20,7 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## <a name='Pre-requisites'></a>Pre-requisites
+## <a name='Prerequisites'></a>Prerequisites
 
 - [ ] UCS machine with Kubeflow 1.0 installed
 - [ ] AWS account with appropriate permissions
