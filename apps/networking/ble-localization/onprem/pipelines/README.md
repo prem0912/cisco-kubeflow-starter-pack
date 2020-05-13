@@ -1,22 +1,39 @@
-# BLERSSI Location Prediction using Kubeflow Pipelines
+# BLE-RSSI Location Prediction using Kubeflow Pipelines
 
-## What we're going to build
+<!-- vscode-markdown-toc -->
+* [What we're going to build](#Whatweregoingtobuild)
+* [Infrastructure Used](#InfrastructureUsed)
+* [Setup](#Setup)
+	* [Install NFS server (if not installed)](#InstallNFSserverifnotinstalled)
+		* [Retrieve Ingress IP](#RetrieveIngressIP)
+		* [Installing NFS server, PVs and PVCs.](#InstallingNFSserverPVsandPVCs.)
+	* [Create Jupyter Notebook Server](#CreateJupyterNotebookServer)
+	* [Upload Notebook file](#UploadNotebookfile)
+	* [Run BLERSSI Pipeline](#RunBLERSSIPipeline)
+
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+## <a name='Whatweregoingtobuild'></a>What we're going to build
 
 To train, serve and prodict  model  using kubeflow pipeline through jupyter-notebook.
 
 ![TF-BLERSSI Pipeline](pictures/0-blerssi-graph.png)
 
-## Infrastructure Used
+## <a name='InfrastructureUsed'></a>Infrastructure Used
 
 * Cisco UCS - C240
 
-## Setup
+## <a name='Setup'></a>Setup
 
-### Install NFS server (if not installed)
+### <a name='InstallNFSserverifnotinstalled'></a>Install NFS server (if not installed)
 
 To install NFS server follow steps below.
 
-#### Retrieve Ingress IP
+#### <a name='RetrieveIngressIP'></a>Retrieve Ingress IP
 
 For installation, we need to know the external IP of the 'istio-ingressgateway' service. This can be retrieved by the following steps.  
 
@@ -36,19 +53,19 @@ Use either of 'EXTERNAL-IP' or 'INTERNAL-IP' of any of the nodes based on which 
 
 This IP will be referred to as INGRESS_IP from here on.
 
-#### Installing NFS server, PVs and PVCs.
+#### <a name='InstallingNFSserverPVsandPVCs.'></a>Installing NFS server, PVs and PVCs.
 
 Follow the [steps](./../install/) to install NFS server, PVs and PVCs.
 
-### Create Jupyter Notebook Server
+### <a name='CreateJupyterNotebookServer'></a>Create Jupyter Notebook Server
 
 Follow the [steps](./../notebook#create--connect-to-jupyter-notebook-server) to create & connect to Jupyter Notebook Server in Kubeflow
 
-### Upload Notebook file
+### <a name='UploadNotebookfile'></a>Upload Notebook file
 
 Upload [BLERSSI-Pipeline-Deployment.ipynb](BLERSSI-Pipeline-Deployment.ipynb)
 
-### Run BLERSSI Pipeline
+### <a name='RunBLERSSIPipeline'></a>Run BLERSSI Pipeline
 
 Open the BLERSSI-Pipeline-Deployment.ipynb file and run pipeline
 
