@@ -30,6 +30,13 @@ can be found [here](../../README.md).
 - [ ] UCS machine with Kubeflow 1.0 installed
 - [ ] AWS account with appropriate permissions
 
+## Solution Schematic
+
+![Solution Schematic](./pictures/cisco-aws-schematic.png)
+
+The overall solution uses [Kubeflow](https://www.kubeflow.org/) to run
+the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unified-computing/index.html) servers and the model is then served via [Amazon SageMaker](https://aws.amazon.com/sagemaker/).
+
 ## <a name='AWSSetup'></a>AWS Setup
 ### <a name='CreateS3Bucket'></a>Create S3 Bucket
 
