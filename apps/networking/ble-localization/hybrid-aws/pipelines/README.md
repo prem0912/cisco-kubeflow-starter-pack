@@ -130,8 +130,9 @@ Create experiment with name "BLERSSI-Sagemaker"
 ![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
 
 
+:information_source: 
 ### <a name='Buildinginferenceimage'></a>Building inference image
-:information_source:   
+  
    Run build & push script [here](./components/v1/mxnet-byom-inference/container/build_and_push.sh) using your *account credentials*.
 
 Set AWS region, and inference image to the built ECR image
