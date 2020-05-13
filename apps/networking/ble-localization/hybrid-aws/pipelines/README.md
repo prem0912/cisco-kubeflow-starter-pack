@@ -7,6 +7,7 @@
 	* [Setup SageMaker permissions](#SetupSageMakerpermissions)
 * [UCS Setup](#UCSSetup)
 	* [Retrieve Ingress IP](#RetrieveIngressIP)
+* [Pipeline Workflow](#PipelineWorkflow)
 	* [Create Jupyter Notebook Server](#CreateJupyterNotebookServer)
 	* [Upload Hybrid Pipeline notebook](#UploadHybridPipelinenotebook)
 	* [Run Pipeline](#RunPipeline)
@@ -82,6 +83,10 @@ kubectl get nodes -o wide
 Use either of 'EXTERNAL-IP' or 'INTERNAL-IP' of any of the nodes based on which IP is accessible in your network.  
 
 This IP will be referred to as INGRESS_IP from here on.
+
+## <a name='PipelineWorkflow'></a>Pipeline Workflow
+Once the setup is complete, the following are the steps in the pipeline
+workflow.
 
 ### <a name='CreateJupyterNotebookServer'></a>Create Jupyter Notebook Server
 
