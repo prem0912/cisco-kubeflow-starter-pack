@@ -1,4 +1,4 @@
-# BLERSSI Location Prediction using Kubeflow Pipelines
+# BLE-RSSI Location Prediction using Kubeflow Pipelines
 
 <!-- vscode-markdown-toc -->
 * [What we're going to build](#Whatweregoingtobuild)

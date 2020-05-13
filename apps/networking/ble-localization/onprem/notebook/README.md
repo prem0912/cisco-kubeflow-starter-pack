@@ -1,4 +1,4 @@
-# BLERSSI Location Prediction 
+# BLE-RSSI Location Prediction 
 
 <!-- vscode-markdown-toc -->
 * [What we're going to do](#Whatweregoingtodo)

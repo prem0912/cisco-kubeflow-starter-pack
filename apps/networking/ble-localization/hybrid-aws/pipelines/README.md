@@ -1,4 +1,4 @@
-# BLERSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
+# BLE-RSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
 
 <!-- vscode-markdown-toc -->
 * [Pre-requisites](#Pre-requisites)
