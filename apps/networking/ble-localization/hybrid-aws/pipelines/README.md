@@ -17,7 +17,8 @@ Otherwise, you can use the docker image with the alias set.
 ### Setup SageMaker permissions
 
 In order to run this pipeline, we need to prepare an IAM Role to run Sagemaker jobs. You need this `role_arn` to run a pipeline. Check [here](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html) for details.
-IAM Role should have AmazonS3FullAccess and AmazonSageMakerFullAccess policies attached.
+
+Attach AmazonS3FullAccess and AmazonSageMakerFullAccess policies with IAM Role.
 
 ![BLERSSI Pipeline](./pictures/aws-role.PNG)
 
