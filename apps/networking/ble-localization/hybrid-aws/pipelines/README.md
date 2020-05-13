@@ -1,6 +1,7 @@
 # BLE-RSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
 
 <!-- vscode-markdown-toc -->
+* [Problem Definition](#ProblemDefinition)
 * [Prerequisites](#Prerequisites)
 * [AWS Setup](#AWSSetup)
 	* [Create S3 Bucket](#CreateS3Bucket)
@@ -19,6 +20,9 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
+
+## <a name='ProblemDefinition'></a>Problem Definition
+The problem definition can be found [here](../../README.md).
 
 ## <a name='Prerequisites'></a>Prerequisites
 
