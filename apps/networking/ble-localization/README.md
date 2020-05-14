@@ -22,5 +22,8 @@ Each location is usually covered by multiple beacons and all those
 measurements were captured.
 
 Different modes (onprem, hybrid, multi-cloud) of training & deploying model using Kubeflow are possible for this application:
-  - [Hybrid - Cisco UCS & Amazon SageMaker ](./hybrid-aws)
+  - [Hybrid - Onprem & Cloud](./hybrid)
+    - [Amazon Web Services (AWS)](./hybrid/aws)
+    - Google Cloud Platform (GCP) [Coming soon]
+    - Microsoft Azure [Coming soon]
   - [Onprem - Cisco UCS ](./onprem)
