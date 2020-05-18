@@ -56,7 +56,9 @@ Attach AmazonS3FullAccess and AmazonSageMakerFullAccess policies with IAM Role.
 ![BLERSSI Pipeline](./pictures/aws-role.PNG)
 
 
-This pipeline also use aws-secret to get access to Sagemaker services, please also make sure you have a `aws-secret` in the kubeflow namespace.
+Pipeline and notebook uses aws-secret to get access to Sagemaker services
+
+Make sure you have  `aws-secret` in kubeflow and anonymous namespace.
 
     echo -n $AWS_ACCESS_KEY_ID | base64
     echo -n $AWS_SECRET_ACCESS_KEY | base64
@@ -66,11 +68,52 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: aws-secret
-  namespace: kubeflow
 type: Opaque
 data:
   AWS_ACCESS_KEY_ID: YOUR_BASE64_ACCESS_KEY
   AWS_SECRET_ACCESS_KEY: YOUR_BASE64_SECRET_ACCESS
+```
+Apply this yaml in kubeflow and anonymous namespace
+
+```
+kubectl apply -f aws-secret.yaml -n kubeflow
+kubectl apply -f aws-secret.yaml -n anonymous
+```
+To configure aws-secrets to kubeflow notebook server, create kind `PodDefault` in anonymous namespace
+
+```yaml
+apiVersion: "kubeflow.org/v1alpha1"
+kind: PodDefault
+metadata:
+  name: add-aws-secret
+spec:
+ selector:
+  matchLabels:
+    add-aws-secret: "true"
+ desc: "add aws credentials to notebook server"
+ volumeMounts:
+ - name: secret-volume
+   mountPath: /secret/gcp
+ volumes:
+ - name: secret-volume
+   secret:
+    secretName: aws-secret
+ env:
+ - name: AWS_ACCESS_KEY_ID
+   valueFrom:
+     secretKeyRef:
+       name: aws-secret
+       key: AWS_ACCESS_KEY_ID
+ - name: AWS_SECRET_ACCESS_KEY
+   valueFrom:
+     secretKeyRef:
+       name: aws-secret
+       key: AWS_SECRET_ACCESS_KEY
+```
+Apply this yaml in anonymous namespace
+
+```
+kubectl apply -f add-aws-secret.yaml -n anonymous
 ```
 
 ## <a name='UCSSetup'></a>UCS Setup
@@ -103,8 +146,11 @@ workflow.
 
 ### <a name='CreateJupyterNotebookServer'></a>Create Jupyter Notebook Server
 
+Add configuration as given below to attach aws-secrets while creating new notebook server
+
+![BLERSSI Pipeline](./pictures/6-notebook-configurations.PNG)
+
 Follow the [steps](./../notebook#create--connect-to-jupyter-notebook-server) to create & connect to Jupyter Notebook Server in Kubeflow    
-    
 ### <a name='UploadHybridPipelinenotebook'></a>Upload Hybrid Pipeline notebook
 
 Upload [blerssi-aws.ipynb](blerssi-aws.ipynb) file to the created Notebook server.
@@ -113,22 +159,13 @@ Upload [blerssi-aws.ipynb](blerssi-aws.ipynb) file to the created Notebook serve
 
 Open the [blerssi-aws.ipynb](blerssi-aws.ipynb) file and run pipeline
 
-Set the input parameters for the pipeline in the first cell of the notebook.
+Install required libraries
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-1.PNG)
+![BLERSSI Pipeline](./pictures/1-install-libraries.PNG)
 
-Import libraries and set model/deploy component yaml path variables.
+Restart kernel and Import libraries 
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-2.PNG)
-
-Define BLERSSI mxnet pipeline function
-
-![BLERSSI Pipeline](./pictures/notebook-sabe-3.PNG)
-
-Create experiment with name "BLERSSI-Sagemaker"
-
-![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
-
+![BLERSSI Pipeline](./pictures/2-restart-kernal.PNG)
 
 :information_source: 
 ### <a name='Buildinginferenceimage'></a>Building inference image
@@ -137,7 +174,21 @@ Create experiment with name "BLERSSI-Sagemaker"
 
 Set AWS region, and inference image to the built ECR image
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-5.PNG)
+Set other pipeline parameters 
+
+![BLERSSI Pipeline](./pictures/3-set-parameters.PNG)
+
+Set model/deploy component yaml path variables.
+
+![BLERSSI Pipeline](./pictures/4-set-model-path.PNG)
+
+Define BLERSSI mxnet pipeline function
+
+![BLERSSI Pipeline](./pictures/notebook-sabe-3.PNG)
+
+Create experiment with name "BLERSSI-Sagemaker"
+
+![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
 
 Create BLERSSI run and open run link
 
@@ -157,9 +208,9 @@ To verify endpoint in AWS, open AWS sagemaker and check endpoints created succes
 
 To predict the output go back to jupyter notebook and start executing other cells
 
-Provide AWS credentials
+Check endpoint status
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-8.PNG)
+![BLERSSI Pipeline](./pictures/5-check-endpoint-status.PNG)
 
 Predicted result will be displayed
 
