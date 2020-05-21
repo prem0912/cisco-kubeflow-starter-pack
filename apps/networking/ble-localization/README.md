@@ -24,6 +24,6 @@ measurements were captured.
 Different modes (onprem, hybrid, multi-cloud) of training & deploying model using Kubeflow are possible for this application:
   - [Hybrid - Onprem & Cloud](./hybrid)
     - [Amazon Web Services (AWS)](./hybrid/aws)
-    - Google Cloud Platform (GCP) [Coming soon]
+    - [Google Cloud Platform (GCP)](./hybrid/gcp)
     - Microsoft Azure [Coming soon]
   - [Onprem - Cisco UCS ](./onprem)
