@@ -55,7 +55,7 @@ kubectl get secret -n kubeflow | grep user-gcp-sa
 
 ## <a name='UCSSetup'></a>UCS Setup
 
-To install Kubeflow, follow the instructions [here](../../../../../install)
+To install Kubeflow, follow the instructions [here](../../../../../../install)
 
 ### <a name='RetrieveIngressIP'></a>Retrieve Ingress IP
 
