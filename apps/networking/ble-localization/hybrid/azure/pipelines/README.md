@@ -2,7 +2,6 @@
 <!-- vscode-markdown-toc -->
 * [Problem Definition](#ProblemDefinition)
 * [Prerequisites](#Prerequisites)
-* [Solution Schematic](#SolutionSchematic)
 * [Azure Setup](#AzureSetup)
 	* [Create Azure ResourceGroup](#CreateResourceGroup)
 	* [Create Azure ML Workspace](#CreateMLWorkspace)
