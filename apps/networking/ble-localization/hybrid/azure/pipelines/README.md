@@ -31,10 +31,6 @@ can be found [here](../../README.md).
 - [ ] UCS machine with Kubeflow 1.0 installed
 - [ ] Azure account with appropriate permissions
 
-## <a name='SolutionSchematic'></a>Solution Schematic
-
-![Solution Schematic](./pictures/cisco-aws-schematic.png)
-
 The overall solution uses [Kubeflow](https://www.kubeflow.org/) to run
 the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unified-computing/index.html) servers and the model is then served via [Azure ML](https://docs.microsoft.com/en-us/azure/machine-learning/).
 
@@ -52,64 +48,93 @@ Create Azure ML Worspace inside ResourceGroup. Check [here](https://docs.microso
 Create Azure Resource Group. Check [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) for detailed documentation
 
 
-Pipeline and notebook uses aws-secret to get access to Sagemaker services
+Pipeline and notebook uses azure-secret to get access to azure ML
 
-Make sure you have  `aws-secret` in kubeflow and anonymous namespace.
+Make sure you have  `azure-secret` in kubeflow and anonymous namespace.
 
-    echo -n $AWS_ACCESS_KEY_ID | base64
-    echo -n $AWS_SECRET_ACCESS_KEY | base64
-
+    echo -n $YOUR_BASE64_WORKSPACE_NAME | base64
+    echo -n $YOUR_BASE64_SUBSCRIPTION_ID | base64
+    echo -n $YOUR_BASE64_RESOURCE_GROUP | base64
+    echo -n $YOUR_BASE64_TENANT_ID | base64
+    echo -n $YOUR_BASE64_SERVICE_PRINCIPAL_ID | base64
+    echo -n $YOUR_BASE64_SERVICE_PRINCIPAL_PASSWORD | base64
+	
+	
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: aws-secret
+  name: azure-secret
 type: Opaque
 data:
-  AWS_ACCESS_KEY_ID: YOUR_BASE64_ACCESS_KEY
-  AWS_SECRET_ACCESS_KEY: YOUR_BASE64_SECRET_ACCESS
+  WORKSPACE_NAME: YOUR_BASE64_WORKSPACE_NAME
+  SUBSCRIPTION_ID: YOUR_BASE64_SUBSCRIPTION_ID
+  RESOURCE_GROUP: YOUR_BASE64_RESOURCE_GROUP
+  TENANT_ID: YOUR_BASE64_TENANT_ID
+  SERVICE_PRINCIPAL_ID: YOUR_BASE64_SERVICE_PRINCIPAL_ID
+  SERVICE_PRINCIPAL_PASSWORD: YOUR_BASE64_SERVICE_PRINCIPAL_PASSWORD
 ```
 Apply this yaml in kubeflow and anonymous namespace
 
 ```
-kubectl apply -f aws-secret.yaml -n kubeflow
-kubectl apply -f aws-secret.yaml -n anonymous
+kubectl apply -f azure-secret.yaml -n kubeflow
+kubectl apply -f azure-secret.yaml -n anonymous
 ```
-To configure aws-secrets to kubeflow notebook server, create kind `PodDefault` in anonymous namespace
+To configure azure-secrets to kubeflow notebook server, create kind `PodDefault` in anonymous namespace
 
 ```yaml
 apiVersion: "kubeflow.org/v1alpha1"
 kind: PodDefault
 metadata:
-  name: add-aws-secret
+  name: add-azure-secret
 spec:
  selector:
   matchLabels:
-    add-aws-secret: "true"
- desc: "add aws credentials to notebook server"
+    add-azure-secret: "true"
+ desc: "Add Azure credentials to notebook server"
  volumeMounts:
  - name: secret-volume
    mountPath: /secret/gcp
  volumes:
  - name: secret-volume
    secret:
-    secretName: aws-secret
+    secretName: azure-secret
  env:
- - name: AWS_ACCESS_KEY_ID
+ - name: WORKSPACE_NAME
    valueFrom:
      secretKeyRef:
-       name: aws-secret
-       key: AWS_ACCESS_KEY_ID
- - name: AWS_SECRET_ACCESS_KEY
+       name: azure-secret
+       key: WORKSPACE_NAME
+ - name: SUBSCRIPTION_ID
    valueFrom:
      secretKeyRef:
-       name: aws-secret
-       key: AWS_SECRET_ACCESS_KEY
+       name: azure-secret
+       key: SUBSCRIPTION_ID
+ - name: RESOURCE_GROUP
+   valueFrom:
+     secretKeyRef:
+       name: azure-secret
+       key: RESOURCE_GROUP
+ - name: TENANT_ID
+   valueFrom:
+     secretKeyRef:
+       name: azure-secret
+       key: TENANT_ID
+ - name: SERVICE_PRINCIPAL_ID
+   valueFrom:
+     secretKeyRef:
+       name: azure-secret
+       key: SERVICE_PRINCIPAL_ID
+ - name: SERVICE_PRINCIPAL_PASSWORD
+   valueFrom:
+     secretKeyRef:
+       name: azure-secret
+       key: SERVICE_PRINCIPAL_PASSWORD
 ```
 Apply this yaml in anonymous namespace
 
 ```
-kubectl apply -f add-aws-secret.yaml -n anonymous
+kubectl apply -f add-azure-secret.yaml -n anonymous
 ```
 
 ## <a name='UCSSetup'></a>UCS Setup
@@ -142,72 +167,47 @@ workflow.
 
 ### <a name='CreateJupyterNotebookServer'></a>Create Jupyter Notebook Server
 
-Add configuration as given below to attach aws-secrets while creating new notebook server
+Add configuration as given below to attach azure-secrets while creating new notebook server
 
 ![BLERSSI Pipeline](./pictures/6-notebook-configurations.PNG)
 
 Follow the [steps](./../notebook#create--connect-to-jupyter-notebook-server) to create & connect to Jupyter Notebook Server in Kubeflow    
 ### <a name='UploadHybridPipelinenotebook'></a>Upload Hybrid Pipeline notebook
 
-Upload [blerssi-aws.ipynb](blerssi-aws.ipynb) file to the created Notebook server.
+Upload [blerssi-azure.ipynb](blerssi-azure.ipynb) file to the created Notebook server.
     
 ### <a name='RunPipeline'></a>Run Pipeline
 
-Open the [blerssi-aws.ipynb](blerssi-aws.ipynb) file and run pipeline
+Open the [blerssi-azure.ipynb](blerssi-azure.ipynb) file and run pipeline
 
-Install required libraries
+Clone git repository to download components and install required libraries 
 
-![BLERSSI Pipeline](./pictures/1-install-libraries.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-01.PNG)
 
-Restart kernel and Import libraries 
+Import libraries and declare component files
 
-![BLERSSI Pipeline](./pictures/2-restart-kernal.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-02.PNG)
 
-:information_source: 
-### <a name='Buildinginferenceimage'></a>Building inference image
-  
-   Run build & push script [here](./components/v1/mxnet-byom-inference/container/build_and_push.sh) using your *account credentials*.
+Load component files and define nfs persistant volume and persistant volume claim
 
-Set AWS region, and inference image to the built ECR image
+![BLERSSI Pipeline](./pictures/azure-pipeline-03.PNG)
 
-Set other pipeline parameters 
+Definition of pipeline function
 
-![BLERSSI Pipeline](./pictures/3-set-parameters.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-04.PNG)
 
-Set model/deploy component yaml path variables.
+Deploy pipeline, create pipeline experiment and run 
 
-![BLERSSI Pipeline](./pictures/4-set-model-path.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-05.PNG)
 
-Define BLERSSI mxnet pipeline function
+Declare azure authentication
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-3.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-06.PNG)
 
-Create experiment with name "BLERSSI-Sagemaker"
+Check Inference service URL and Inference logs
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-4.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG
 
-Create BLERSSI run and open run link
+Send prediction request to azure inference service
 
-![BLERSSI Pipeline](./pictures/notebook-sabe-6.PNG)
-
-
-The BLERSSI Sagemaker pipeline starts executing. 
-Once all the components executed successfully, check the logs of sagemaker-deploy component to verify endpoint is created.
-
-![BLERSSI Pipeline](./pictures/notebook-sabe-7.PNG)
-
-To verify endpoint in AWS, open AWS sagemaker and check endpoints created successfully as snapshot given below
-
-![BLERSSI Pipeline](./pictures/aws-sagemaker-endpoint.PNG)
-
-### <a name='RunPredictionAPI'></a>Run Prediction API
-
-To predict the output go back to jupyter notebook and start executing other cells
-
-Check endpoint status
-
-![BLERSSI Pipeline](./pictures/5-check-endpoint-status.PNG)
-
-Predicted result will be displayed
-
-![BLERSSI Pipeline](./pictures/notebook-sabe-9.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-08.PNG)
