@@ -180,7 +180,7 @@ Open the [blerssi-azure.ipynb](blerssi-azure.ipynb) file and run pipeline
 
 Clone git repository to download components and install required libraries 
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-01.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-01.png)
 
 Import libraries and declare component files
 
@@ -188,36 +188,36 @@ Import libraries and declare component files
 
 Load component files and define nfs persistent volume and persistent volume claim
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-03.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-03.png)
 
 Declare environment variables for using Azure credentials
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-04.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-04.png)
 
 Definition of pipeline function
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-05.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-05.png)
 
 
 Deploy pipeline, create pipeline experiment and run 
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-06.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-06.png)
 
 Declare Azure authentication
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-07.png)
 
 Retrieve Azure scoring URI & view logs
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-08.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-08.png)
 
 Process input data
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-09.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-09.png)
 
 
 ### <a name='RunPredictionAPI'></a>Run Prediction API
 
 Send prediction request to Azure inference service
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-10.PNG)
+![BLERSSI Pipeline](./pictures/azure-pipeline-10.png)
