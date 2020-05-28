@@ -205,7 +205,7 @@ Declare azure authentication
 
 Check Inference service URL and Inference logs
 
-![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG
+![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG)
 
 Send prediction request to azure inference service
 
