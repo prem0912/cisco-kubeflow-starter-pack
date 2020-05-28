@@ -1,3 +1,5 @@
+# Python script to train BLERSSI model
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -10,14 +12,8 @@ import sys
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-import shutil
 import os
-import re
-from sklearn.preprocessing import OneHotEncoder
-import zipfile 
-
-from azure.storage.file import FileService
-from azure.storage.file import ContentSettings
+from zipfile import ZipFile 
 
 BLE_RSSI = pd.read_csv('/opt/iBeacon_RSSI_Labeled.csv') #Labeled dataset
 
@@ -47,13 +43,7 @@ def parse_arguments():
                       type=float,
                       default=0.01,
                       help='Learning rate for training.')
-  parser.add_argument('--azure-storage-account-name',
-                      type=str,
-                      help='Name of the Azure Storage Account to save the trained model.')
-  parser.add_argument('--azure-storage-account-key',
-                      type=str,
-                      help='Azure Storage Account key')
-
+  
 
   args = parser.parse_args()
   return args
@@ -152,36 +142,7 @@ def main(unused_args):
   with open('/tf_export_dir.txt', 'w') as f:
     f.write(args.tf_export_dir)
     
-    for dir in os.listdir(args.tf_export_dir):
-        if re.match( "^[0-9]+$", dir):
-                target_path = os.path.join(export_dir, dir)
-
-                def zipfolder(foldername, target_dir):            
-                    zipobj = zipfile.ZipFile(foldername + '.zip', 'w', zipfile.ZIP_DEFLATED)
-                    rootlen = len(target_dir) + 1
-                    for base, dirs, files in os.walk(target_dir):
-                        for file in files:
-                            fn = os.path.join(base, file)
-                            zipobj.write(fn, fn[rootlen:])
-
-                zipfolder('blerssinew', target_path) #insert your variables here
-
-
-                file_service = FileService(account_name=args.azure_storage_account_name, account_key=args.azure_storage_account_key)
-
-                file_service.create_share('mymodel')
-
-                #file_service.create_directory('myshare', 'sampledir')
-
-
-                file_service.create_file_from_path(
-                'mymodel',
-                None,  # We want to create this blob in the root directory, so we specify None for the directory_name
-                'blerssi',
-                'blerssinew.zip',
-                content_settings=ContentSettings(content_type='zip'))
- 
-        
+            
 if __name__ == "__main__":
     tf.app.run()
 

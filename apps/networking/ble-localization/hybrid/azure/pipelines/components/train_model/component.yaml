@@ -4,18 +4,16 @@ inputs:
   - {name: TF model dir, type: String, default: '/mnt/model', description: 'Storage path or local directory.'}
   - {name: TF export dir, type: String, default: '/mnt/Model_Blerssi', description: 'Storage path or local directory to export model'}
   - {name: TF model type, type: String, default: 'DNN', description: 'Tensorflow model type for training.'}
-  - {name: TF train steps, type: Integer, default: 20, description: 'The number of training steps to perform.'}
+  - {name: TF train steps, type: Integer, default: 100, description: 'The number of training steps to perform.'}
   - {name: TF batch size, type: Integer, default: 100, description: 'The number of batch size during training'}
   - {name: TF learning rate, type: Float, default: 0.01, description: 'Learning rate for training.'}
-  - {name: Azure storage account name, type: String, description: 'Name of the Azure Storage Account to save the trained model.'}
-  - {name: Azure storage account key, type: String, description: 'Azure Storage Account key'}
 
 outputs:
         - {name: TF export dir, type: GCSPath,  description: 'GCS or local directory.'} # type: {GCSPath: {path_type: Directory}}
 
 implementation:
   container:
-    image: docker.io/poornimadevii/azuretrainbler:v1
+    image: docker.io/poornimadevii/train_blerssi_model:v20200528--e3b0c4
     command: ["python", "/opt/blerssi-model.py"]
     args: [
       --tf-model-dir, {inputValue: TF model dir},
@@ -24,8 +22,7 @@ implementation:
       --tf-train-steps, {inputValue: TF train steps},
       --tf-batch-size, {inputValue: TF batch size},
       --tf-learning-rate, {inputValue: TF learning rate},
-      --azure-storage-account-name, {inputValue: Azure storage account name},
-      --azure-storage-account-key, {inputValue: Azure storage account key},
+      
     ]
     fileOutputs:
       TF export dir: /tf_export_dir.txt

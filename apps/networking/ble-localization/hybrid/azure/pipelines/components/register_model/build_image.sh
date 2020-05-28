@@ -18,7 +18,7 @@ while getopts ":hu:t:i:l:" opt; do
     h)  echo "-t: tag name"
         echo "-u: user name"
         echo "-i: image name. If provided, project name and tag name are not necessary"
-        echo "-l: local image name. Optional. Defaults to 'tf_model_train'"
+        echo "-l: local image name. Optional. Defaults to 'register_blerssi_model'"
         exit
       ;;
     u) USER_NAME=${OPTARG}
@@ -37,7 +37,7 @@ done
 
 set -x
 if [ -z "${LOCAL_IMAGE_NAME}" ]; then
-  LOCAL_IMAGE_NAME=tf_model_train
+  LOCAL_IMAGE_NAME=register_blerssi_model
 fi
 
 if [ -z "${USER_NAME}" ]; then
