@@ -1,12 +1,12 @@
-# BLE-RSSI Hybrid Pipeline using Cisco UCS 🤝 Amazon SageMaker
-
+# BLE-RSSI Hybrid Pipeline using Cisco UCS 🤝 Azure ML
 <!-- vscode-markdown-toc -->
 * [Problem Definition](#ProblemDefinition)
 * [Prerequisites](#Prerequisites)
 * [Solution Schematic](#SolutionSchematic)
-* [AWS Setup](#AWSSetup)
-	* [Create S3 Bucket](#CreateS3Bucket)
-	* [Setup SageMaker permissions](#SetupSageMakerpermissions)
+* [Azure Setup](#AzureSetup)
+	* [Create Azure ResourceGroup](#CreateResourceGroup)
+	* [Create Azure ML Workspace](#CreateMLWorkspace)
+	* [Create Azure Service Principal](#CreateServicePreincpal)
 * [UCS Setup](#UCSSetup)
 	* [Retrieve Ingress IP](#RetrieveIngressIP)
 * [Pipeline Workflow](#PipelineWorkflow)
@@ -29,31 +29,27 @@ can be found [here](../../README.md).
 ## <a name='Prerequisites'></a>Prerequisites
 
 - [ ] UCS machine with Kubeflow 1.0 installed
-- [ ] AWS account with appropriate permissions
+- [ ] Azure account with appropriate permissions
 
 ## <a name='SolutionSchematic'></a>Solution Schematic
 
 ![Solution Schematic](./pictures/cisco-aws-schematic.png)
 
 The overall solution uses [Kubeflow](https://www.kubeflow.org/) to run
-the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unified-computing/index.html) servers and the model is then served via [Amazon SageMaker](https://aws.amazon.com/sagemaker/).
+the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unified-computing/index.html) servers and the model is then served via [Azure ML](https://docs.microsoft.com/en-us/azure/machine-learning/).
 
-## <a name='AWSSetup'></a>AWS Setup
-### <a name='CreateS3Bucket'></a>Create S3 Bucket
+## <a name='AzureSetup'></a>Azure Setup
+### <a name='CreateResourceGroup'></a>Create Azure ResourceGroup
 
-Ensure you have the AWS CLI installed. 
-Otherwise, you can use the docker image with the alias set.
+Create Azure Resource Group. Check [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) for detailed documentation
 
-    alias aws='docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli'
-    aws s3 mb s3://mxnet-model-store --region us-west-2
+### <a name='CreateMLWorkspace'></a>Create Azure Machine Learning Workspace
 
-### <a name='SetupSageMakerpermissions'></a>Setup SageMaker permissions
+Create Azure ML Worspace inside ResourceGroup. Check [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace) for detailed documentation
 
-In order to run this pipeline, we need to prepare an IAM Role to run Sagemaker jobs. You need this `role_arn` to run a pipeline. Check [here](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html) for details.
+### <a name='CreateServicePrincipal'></a>Create Service Principal Authentication
 
-Attach AmazonS3FullAccess and AmazonSageMakerFullAccess policies with IAM Role.
-
-![BLERSSI Pipeline](./pictures/aws-role.PNG)
+Create Azure Resource Group. Check [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) for detailed documentation
 
 
 Pipeline and notebook uses aws-secret to get access to Sagemaker services
