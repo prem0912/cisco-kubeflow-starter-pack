@@ -50,12 +50,12 @@ Pipeline and notebook uses azure-secret to get access to azure ML
 
 Make sure you have  `azure-secret` in kubeflow and anonymous namespace.
 
-    echo -n $YOUR_BASE64_WORKSPACE_NAME | base64
-    echo -n $YOUR_BASE64_SUBSCRIPTION_ID | base64
-    echo -n $YOUR_BASE64_RESOURCE_GROUP | base64
-    echo -n $YOUR_BASE64_TENANT_ID | base64
-    echo -n $YOUR_BASE64_SERVICE_PRINCIPAL_ID | base64
-    echo -n $YOUR_BASE64_SERVICE_PRINCIPAL_PASSWORD | base64
+    echo -n $WORKSPACE_NAME | base64
+    echo -n SUBSCRIPTION_ID | base64
+    echo -n $RESOURCE_GROUP | base64
+    echo -n $TENANT_ID | base64
+    echo -n $SERVICE_PRINCIPAL_ID | base64
+    echo -n $SERVICE_PRINCIPAL_PASSWORD | base64
 	
 	
 ```yaml
