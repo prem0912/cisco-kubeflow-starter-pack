@@ -186,28 +186,38 @@ Import libraries and declare component files
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-02.PNG)
 
-Load component files and define nfs persistant volume and persistant volume claim
+Load component files and define nfs persistent volume and persistent volume claim
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-03.PNG)
 
-Definition of pipeline function
+Declare environment variables for using Azure credentials
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-04.PNG)
 
-Deploy pipeline, create pipeline experiment and run 
+Definition of pipeline function
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-05.PNG)
 
-Declare azure authentication
+
+Deploy pipeline, create pipeline experiment and run 
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-06.PNG)
 
-Check Inference service URL and Inference logs
+Declare Azure authentication
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG)
 
-### <a name='RunPredictionAPI'></a>Run Prediction API
-
-Send prediction request to azure inference service
+Retrieve Azure scoring URI & view logs
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-08.PNG)
+
+Process input data
+
+![BLERSSI Pipeline](./pictures/azure-pipeline-09.PNG)
+
+
+### <a name='RunPredictionAPI'></a>Run Prediction API
+
+Send prediction request to Azure inference service
+
+![BLERSSI Pipeline](./pictures/azure-pipeline-10.PNG)
