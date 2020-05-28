@@ -5,14 +5,13 @@
 * [Azure Setup](#AzureSetup)
 	* [Create Azure ResourceGroup](#CreateResourceGroup)
 	* [Create Azure ML Workspace](#CreateMLWorkspace)
-	* [Create Azure Service Principal](#CreateServicePreincpal)
+	* [Create Azure Service Principal](#CreateServicePrincipal)
 * [UCS Setup](#UCSSetup)
 	* [Retrieve Ingress IP](#RetrieveIngressIP)
 * [Pipeline Workflow](#PipelineWorkflow)
 	* [Create Jupyter Notebook Server](#CreateJupyterNotebookServer)
 	* [Upload Hybrid Pipeline notebook](#UploadHybridPipelinenotebook)
 	* [Run Pipeline](#RunPipeline)
-	* [Building inference image](#Buildinginferenceimage)
 	* [Run Prediction API](#RunPredictionAPI)
 
 <!-- vscode-markdown-toc-config
@@ -206,6 +205,8 @@ Declare azure authentication
 Check Inference service URL and Inference logs
 
 ![BLERSSI Pipeline](./pictures/azure-pipeline-07.PNG)
+
+### <a name='RunPredictionAPI'></a>Run Prediction API
 
 Send prediction request to azure inference service
 
