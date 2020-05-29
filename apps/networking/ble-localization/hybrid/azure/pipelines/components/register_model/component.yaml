@@ -1,0 +1,25 @@
+name: Register BLERSSI Model
+description: Registers BLERSSI model on Azure ML studio
+inputs:
+  - {name: workspace name, type: String, description: 'workspace name '}
+  - {name: subscription id, type: String, description: 'subscription id'}
+  - {name: resource group, type: String, description: 'resource group'}
+  - {name: model name, type: String, description: 'model name'}
+  - {name: tenant id, type: String, description: 'tenant id'}
+  - {name: service principal id, type: String, description: 'service principal id'}
+  - {name: service principal password, type: String, description: 'service principal password'}
+
+  
+implementation:
+  container:
+    image: docker.io/poornimadevii/modelreg:v20200527--e3b0c4
+    command: ["python", "/opt/register_model.py"]
+    args: [
+      --workspacename, {inputValue: workspace name},
+      --subscriptionid, {inputValue: subscription id},
+      --resourcegroup, {inputValue: resource group},  
+      --modelname, {inputValue: model name},
+      --tenantid, {inputValue: tenant id},
+      --serviceprincipalid, {inputValue: service principal id},
+      --serviceprincipalpassword, {inputValue: service principal password},
+    ]
