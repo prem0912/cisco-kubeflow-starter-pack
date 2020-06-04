@@ -34,7 +34,7 @@ can be found [here](../../README.md).
 The overall solution uses [Kubeflow](https://www.kubeflow.org/) to run
 the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unified-computing/index.html) servers and the model is then served via [Amazon SageMaker](https://aws.amazon.com/sagemaker/) in case of AWS cloud, via [GCP AI Platform](https://cloud.google.com/ai-platform/prediction/docs) in case of GCP cloud & via [Azure ML](https://docs.microsoft.com/en-us/azure/machine-learning/) in case of Azure cloud.
 
-## <a name='Cloud Setup'></a>Cloud Setup
+## <a name='CloudSetup'></a>Cloud Setup
 
 To complete the initial setup for selected cloud for deployment, Please refer [AWS Setup](../aws/pipelines#aws-setup), [GCP Setup](../gcp/pipelines#gcp-setup) or [Azure Setup](../azure/pipelines#azure-setup) based on your requirement.
 
