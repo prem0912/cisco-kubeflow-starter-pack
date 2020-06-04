@@ -101,7 +101,7 @@ Set specific parameters for required cloud
 
 Validate whether the required parameters are set
 
-![BLERSSI Pipeline](./pictures/9_validate_parameters.png)
+![BLERSSI Pipeline](./pictures/9_validate_parameter.png)
 
 Load components 
 
@@ -113,7 +113,15 @@ Define pipeline functions
 
 Run pipeline functions
 
-![BLERSSI Pipeline](./pictures/12_run_pipeline.png)
+![BLERSSI Pipeline](./pictures/12_1_run_pipeline.png)
+
+Click on the Run link as shown below to view your pipeline that is executing
+
+![BLERSSI Pipeline](./pictures/12_2_run_pipeline.png)
+
+Wait until the pipeline execution is complete. (sample pipeline for aws cloud is shown)
+
+![BLERSSI Pipeline](./pictures/12_3_run_pipeline.png) 
 
 Check service endpoint status deployed on the chosen cloud
 
@@ -126,6 +134,7 @@ Predict using service endpoint
 Clean up resources after prediction
 
 ![BLERSSI Pipeline](./pictures/15_clean_up_endpoint.png)
+
 
 
 
