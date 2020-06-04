@@ -121,7 +121,7 @@ Click on the Run link as shown below to view your pipeline that is executing
 
 Wait until the pipeline execution is complete. (sample pipeline for aws cloud is shown)
 
-![BLERSSI Pipeline](./pictures/12_3_run_pipeline.png) 
+![BLERSSI Pipeline](../aws/pipelines/pictures/notebook-sabe-7.PNG) 
 
 Check service endpoint status deployed on the chosen cloud
 
