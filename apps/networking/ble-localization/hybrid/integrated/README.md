@@ -38,6 +38,11 @@ the training on [Cisco UCS](https://www.cisco.com/c/en_in/products/servers-unifi
 
 To complete the initial setup for selected cloud for deployment, Please refer [AWS Setup](../aws/pipelines#aws-setup), [GCP Setup](../gcp/pipelines#gcp-setup) or [Azure Setup](../azure/pipelines#azure-setup) based on your requirement.
 
+Note: While performing [AWS Setup](../aws/pipelines#aws-setup) and [Azure Setup](../azure/pipelines#azure-setup), please make sure while adding `PodDefault` configuration, `name` of volumeMounts & `mountPath` of volumeMounts are provided different values for AWS and Azure to prevent conflict while uploading respective secrets to notebook server. Also please modify `name` of `Volumes` accordingly.
+
+Sample of volumeMounts in AWS is shown below.
+
+![BLERSSI Pipeline](./pictures/14_sample_poddefault.png)
 
 ## <a name='UCSSetup'></a>UCS Setup
 
@@ -91,7 +96,7 @@ Import parameters and set them to local variables
 
 ![BLERSSI Pipeline](./pictures/6_import_parameters.png)
 
-Validate whether the required parameters are set
+Validate host & check whether the required parameters are set
 
 ![BLERSSI Pipeline](./pictures/7_validate_host_params.png)
 
