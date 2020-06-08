@@ -52,13 +52,13 @@ class Aws_params:
         inference_image = '245980173641.dkr.ecr.us-west-2.amazonaws.com/mxnet-blerssi-inference:latest'
 
         # endpoint config name for the SageMaker Model Serving Endpoint Config
-        endpoint_config_name = 'mxnet-blerssi-endpoint-config-'+Timestamp.timestamp
+        endpoint_config_name = 'aws-blerssi-endpoint-config-'+Timestamp.timestamp
 
         # endpoint name for SageMaker Serving Endpoint
-        endpoint_name = 'mxnet-blerssi-endpoint-'+Timestamp.timestamp
+        endpoint_name = 'aws-blerssi-endpoint-'+Timestamp.timestamp
 
         #model name to create a re-usable SageMaker Model resource
-        model_name = 'mxnet-blerssi-model-'+Timestamp.timestamp
+        model_name = 'aws-blerssi-model-'+Timestamp.timestamp
 
         # model artifact URL
         # Path to the model tarball 
