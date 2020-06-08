@@ -78,7 +78,7 @@ Set Name of the cloud you wish to use for model deployment
 
 ![BLERSSI Pipeline](./pictures/4_set_cloud_name.png)
 
-Import libraries 
+Import libraries & parameters file 
 
 ![BLERSSI Pipeline](./pictures/5_import_libraries.png)
 
@@ -87,37 +87,29 @@ Import libraries
   
    Run build & push script [here](../aws/pipelines/components/v1/mxnet-byom-inference/container/build_and_push.sh) using your *account credentials*.
 
-Set timestamp
+Import parameters and set them to local variables
 
-![BLERSSI Pipeline](./pictures/6_set_timestamp.png)
-
-Set common parameters (common for GCP & AWS clouds)
-
-![BLERSSI Pipeline](./pictures/7_set_common_parameters.png)
-
-Set specific parameters for required cloud
-
-![BLERSSI Pipeline](./pictures/8_set_specific_parameters.png)
+![BLERSSI Pipeline](./pictures/6_import_parameters.png)
 
 Validate whether the required parameters are set
 
-![BLERSSI Pipeline](./pictures/9_validate_parameter.png)
+![BLERSSI Pipeline](./pictures/7_validate_host_params.png)
 
 Load components 
 
-![BLERSSI Pipeline](./pictures/10_load_components.png)
+![BLERSSI Pipeline](./pictures/8_load_components.png)
 
 Define pipeline functions
 
-![BLERSSI Pipeline](./pictures/11_define_pipeline_functions.png)
+![BLERSSI Pipeline](./pictures/9_define_pipeline_functions.png)
 
 Run pipeline functions
 
-![BLERSSI Pipeline](./pictures/12_1_run_pipeline.png)
+![BLERSSI Pipeline](./pictures/10_1_run_pipeline.png)
 
 Click on the Run link as shown below to view your pipeline that is executing
 
-![BLERSSI Pipeline](./pictures/12_2_run_pipeline.png)
+![BLERSSI Pipeline](./pictures/10_2_run_pipeline.png)
 
 Wait until the pipeline execution is complete. (sample pipeline for aws cloud is shown)
 
@@ -125,15 +117,15 @@ Wait until the pipeline execution is complete. (sample pipeline for aws cloud is
 
 Check service endpoint status deployed on the chosen cloud
 
-![BLERSSI Pipeline](./pictures/13_check_endpoint_status.png)
+![BLERSSI Pipeline](./pictures/11_check_endpoint_status.png)
 
 Predict using service endpoint
 
-![BLERSSI Pipeline](./pictures/14_predict_using_endpoint.png)
+![BLERSSI Pipeline](./pictures/12_predict_using_endpoint.png)
 
 Clean up resources after prediction
 
-![BLERSSI Pipeline](./pictures/15_clean_up_endpoint.png)
+![BLERSSI Pipeline](./pictures/13_clean_up_endpoint.png)
 
 
 
